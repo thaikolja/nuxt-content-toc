@@ -1,7 +1,7 @@
 export default defineNuxtConfig({
 
   modules: ['nuxt-content-toc', '@nuxt/content', '@nuxtjs/tailwindcss'],
-  ssr: false,
+
   devtools: { enabled: false },
 
   css: ['~/assets/global.css'],
@@ -18,5 +18,15 @@ export default defineNuxtConfig({
     activeClass: 'toc-active',
     scrollOffset: 80,
 
+  },
+
+  nitro: {
+    output: {
+      publicDir: '../docs',
+    },
+  },
+
+  app: {
+    baseURL: process.env.NUXT_APP_BASE_URL || '/nuxt-content-toc/',
   },
 })
