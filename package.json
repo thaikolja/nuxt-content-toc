@@ -1,10 +1,16 @@
 {
   "name": "nuxt-content-toc",
-  "version": "3.0.0",
+  "version": "3.1.0",
   "description": "A highly customizable and accessible Table of Contents component for @nuxt/content v2 and v3",
-  "repository": "your-org/nuxt-content-toc",
+  "repository": "thaikolja/nuxt-content-toc",
   "homepage": "https://thaikolja.github.io/nuxt-content-toc/",
   "license": "MIT",
+  "contributors": [
+    {
+      "name": "hanyujie2002",
+      "url": "https://github.com/hanyujie2002"
+    }
+  ],
   "private": false,
   "type": "module",
   "exports": {
