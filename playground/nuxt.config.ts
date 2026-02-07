@@ -4,9 +4,9 @@ export default defineNuxtConfig({
 
   devtools: { enabled: false },
 
-  app: {
-    baseURL: process.env.NUXT_APP_BASE_URL || '/nuxt-content-toc/',
-  },
+  //  app: {
+  //    baseURL: process.env.NUXT_APP_BASE_URL || '/nuxt-content-toc/',
+  //  },
 
   css: ['~/assets/global.css'],
 
@@ -27,6 +27,5 @@ export default defineNuxtConfig({
     levels: [2, 3, 4],
     activeClass: 'toc-active',
     scrollOffset: 80,
-
   },
 })

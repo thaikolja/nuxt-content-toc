@@ -8,7 +8,6 @@
 
 import { defineNuxtPlugin, useRuntimeConfig } from '#app'
 import type { ContentTocRuntimeConfig } from './types'
-import './globals.d.ts'
 
 const DEFAULTS: ContentTocRuntimeConfig = {
   levels: [2, 3, 4],
@@ -17,6 +16,12 @@ const DEFAULTS: ContentTocRuntimeConfig = {
   sublistClass: 'toc-sublist',
   sublistItemClass: 'toc-sublist-item',
   scrollOffset: 80,
+  fontFamily: 'inherit',
+  fontWeight: 'inherit',
+  activeFontWeight: 600,
+  borderWidth: '2px',
+  indentSize: '1.25rem',
+  align: 'left',
 }
 
 /**

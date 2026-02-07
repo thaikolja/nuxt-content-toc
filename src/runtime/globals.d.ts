@@ -1,1 +1,0 @@
-declare const __NUXT_CONTENT_TOC_VERSION__: string

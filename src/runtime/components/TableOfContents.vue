@@ -99,6 +99,42 @@ interface Props {
    */
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   page?: Record<string, any> | null
+
+  /**
+   * Font family for the TOC items.
+   * @default 'inherit'
+   */
+  fontFamily?: string
+
+  /**
+   * Default font weight for TOC items.
+   * @default 'inherit'
+   */
+  fontWeight?: string | number
+
+  /**
+   * Font weight for the active TOC item.
+   * @default 600
+   */
+  activeFontWeight?: string | number
+
+  /**
+   * Width of the left indicator border.
+   * @default '2px'
+   */
+  borderWidth?: string
+
+  /**
+   * Indentation size for nested items.
+   * @default '1.25rem'
+   */
+  indentSize?: string
+
+  /**
+   * Horizontal alignment of the TOC.
+   * @default 'left'
+   */
+  align?: 'left' | 'center' | 'right'
 }
 
 // Define props with defaults from runtime config
@@ -112,18 +148,17 @@ const props = withDefaults(defineProps<Props>(), {
   path: undefined,
   ariaLabel: 'Table of Contents',
   page: undefined,
+  fontFamily: undefined,
+  fontWeight: undefined,
+  activeFontWeight: undefined,
+  borderWidth: undefined,
+  indentSize: undefined,
+  align: undefined,
 })
 
 // Get module configuration from runtime config
 const config = useRuntimeConfig()
-const moduleConfig = config.public.contentToc as {
-  levels: number[]
-  activeClass: string
-  itemClass: string
-  sublistClass: string
-  sublistItemClass: string
-  scrollOffset: number
-}
+const moduleConfig = config.public.contentToc as import('../types').ContentTocRuntimeConfig
 
 // Computed resolved options (props override module config)
 const _resolvedLevels = computed(() => props.levels ?? moduleConfig?.levels ?? [2, 3, 4])
@@ -132,6 +167,27 @@ const resolvedItemClass = computed(() => props.itemClass ?? moduleConfig?.itemCl
 const resolvedSublistClass = computed(() => props.sublistClass ?? moduleConfig?.sublistClass ?? 'toc-sublist')
 const resolvedSublistItemClass = computed(() => props.sublistItemClass ?? moduleConfig?.sublistItemClass ?? 'toc-sublist-item')
 const resolvedScrollOffset = computed(() => props.scrollOffset ?? moduleConfig?.scrollOffset ?? 80)
+const resolvedFontFamily = computed(() => props.fontFamily ?? moduleConfig?.fontFamily ?? 'inherit')
+const resolvedFontWeight = computed(() => props.fontWeight ?? moduleConfig?.fontWeight ?? 'inherit')
+const resolvedActiveFontWeight = computed(() => props.activeFontWeight ?? moduleConfig?.activeFontWeight ?? 600)
+const resolvedBorderWidth = computed(() => props.borderWidth ?? moduleConfig?.borderWidth ?? '2px')
+const resolvedIndentSize = computed(() => props.indentSize ?? moduleConfig?.indentSize ?? '1.25rem')
+// Resolve alignment
+const resolvedAlign = computed(() => {
+  const value = props.align ?? moduleConfig?.align ?? 'left'
+  if (value === true) return 'left'
+  if (value === false) return 'none'
+  return value
+})
+
+// Dynamic CSS variables for theming
+const containerStyles = computed(() => ({
+  '--toc-font-family': resolvedFontFamily.value,
+  '--toc-font-weight': String(resolvedFontWeight.value),
+  '--toc-active-font-weight': String(resolvedActiveFontWeight.value),
+  '--toc-border-width': resolvedBorderWidth.value,
+  '--toc-indent': resolvedIndentSize.value,
+}))
 
 // Get TOC data from content (use page object if available, otherwise path)
 const {
@@ -225,7 +281,11 @@ onMounted(() => {
     v-if="!pending && toc.length > 0"
     :aria-label="ariaLabel"
     role="navigation"
-    class="toc-container"
+    :class="[
+      'toc-container',
+      resolvedAlign !== 'none' ? `toc-align-${resolvedAlign}` : '',
+    ]"
+    :style="containerStyles"
   >
     <!-- Screen reader announcement -->
     <span class="sr-only">{{ ariaLabel }}</span>

@@ -1,77 +1,89 @@
 {
-  "name": "nuxt-content-toc",
-  "version": "3.1.0",
-  "description": "A highly customizable and accessible Table of Contents component for @nuxt/content v2 and v3",
-  "repository": "thaikolja/nuxt-content-toc",
-  "homepage": "https://thaikolja.github.io/nuxt-content-toc/",
-  "license": "MIT",
-  "contributors": [
+  "name":                 "nuxt-content-toc",
+  "version":              "3.0.0",
+  "description":          "A customizable and accessible Table of Contents component for @nuxt/content v2 and v3",
+  "repository":           "thaikolja/nuxt-content-toc",
+  "homepage":             "https://thaikolja.github.io/nuxt-content-toc/",
+  "license":              "MIT",
+  "contributors":         [
+    {
+      "name":    "Kolja Nolte",
+      "url":     "https://github.com/thaikolja/nuxt-content-module",
+      "email":   "kolja.nolte@gmail.com",
+      "web":     "https://www.kolja-nolte.com",
+      "github":  "thaikolja",
+      "gitlab":  "thaikolja",
+      "twitter": "@thaikolja",
+      "bluesky": "thaikolja.bsky.social"
+    },
     {
       "name": "hanyujie2002",
-      "url": "https://github.com/hanyujie2002"
+      "url":  "https://github.com/hanyujie2002"
     }
   ],
-  "private": false,
-  "type": "module",
-  "exports": {
+  "private":              false,
+  "type":                 "module",
+  "exports":              {
     ".": {
-      "types": "./dist/types.d.mts",
+      "types":  "./dist/types.d.mts",
       "import": "./dist/module.mjs"
     }
   },
-  "main": "./dist/module.mjs",
-  "typesVersions": {
+  "main":                 "./dist/module.mjs",
+  "typesVersions":        {
     "*": {
       ".": [
         "./dist/types.d.mts"
       ]
     }
   },
-  "files": [
+  "files":                [
     "dist"
   ],
-  "workspaces": [
+  "workspaces":           [
     "playground"
   ],
-  "scripts": {
-    "prepack": "nuxt-module-build build",
-    "dev": "npm run dev:prepare && nuxt dev playground",
-    "dev:build": "nuxt build playground",
+  "scripts":              {
+    "prepack":       "nuxt-module-build build",
+    "dev":           "npm run dev:prepare && nuxt dev playground",
+    "dev:v2":        "cd test/fixtures/v2 && npm run dev",
+    "dev:build":     "nuxt build playground",
     "generate:docs": "nuxt generate playground",
-    "dev:prepare": "nuxt-module-build build --stub && nuxt-module-build prepare && nuxt prepare playground",
-    "release": "npm run lint && npm run test && npm run prepack && changelogen --release && npm publish && git push --follow-tags",
-    "lint": "eslint .",
-    "test": "vitest run",
-    "test:watch": "vitest watch",
-    "test:types": "vue-tsc --noEmit && cd playground && vue-tsc --noEmit"
+    "dev:prepare":   "nuxt-module-build build --stub && nuxt-module-build prepare && nuxt prepare playground",
+    "release":       "npm run lint && npm run test && npm run prepack && changelogen --release && npm publish && git push --follow-tags",
+    "lint":          "eslint .",
+    "test":          "vitest run",
+    "test:watch":    "vitest watch",
+    "test:types":    "vue-tsc --noEmit && cd playground && vue-tsc --noEmit",
+    "test:v2":       "cd test/fixtures/v2 && npm test"
   },
-  "dependencies": {},
-  "devDependencies": {
-    "better-sqlite3": "^12.6.2",
-    "@nuxt/content": "3.11.2",
-    "@nuxt/devtools": "^3.1.1",
-    "@nuxt/eslint-config": "^1.13.0",
-    "@nuxt/kit": "^4.3.0",
-    "@nuxt/module-builder": "^1.0.2",
-    "@nuxt/schema": "^4.3.0",
-    "@nuxt/test-utils": "^4.0.0",
-    "@nuxtjs/tailwindcss": "^6.13.1",
-    "@types/node": "latest",
-    "@vue/test-utils": "^2.4.6",
-    "changelogen": "^0.6.2",
-    "eslint": "^9.39.2",
-    "happy-dom": "^20.5.0",
-    "nuxt": "^4.3.0",
-    "tailwindcss": "^3.4.17",
-    "typescript": "~5.9.3",
-    "vitest": "^4.0.18",
+  "dependencies":         {},
+  "devDependencies":      {
+    "better-sqlite3":          "^12.6.2",
+    "@nuxt/content":           "3.11.2",
+    "@nuxt/devtools":          "^3.1.1",
+    "@nuxt/eslint-config":     "^1.13.0",
+    "@nuxt/kit":               "^4.3.0",
+    "@nuxt/module-builder":    "^1.0.2",
+    "@nuxt/schema":            "^4.3.0",
+    "@nuxt/test-utils":        "^4.0.0",
+    "@nuxtjs/tailwindcss":     "^6.13.1",
+    "@types/node":             "latest",
+    "@vue/test-utils":         "^2.4.6",
+    "changelogen":             "^0.6.2",
+    "eslint":                  "^9.39.2",
+    "happy-dom":               "^20.5.0",
+    "nuxt":                    "^4.3.0",
+    "tailwindcss":             "^3.4.17",
+    "typescript":              "~5.9.3",
+    "vitest":                  "^4.0.18",
     "vitest-environment-nuxt": "^1.0.1",
-    "vue-tsc": "^3.2.4",
-    "zod": "^4.3.6"
+    "vue-tsc":                 "^3.2.4",
+    "zod":                     "^4.3.6"
   },
-  "peerDependencies": {
+  "peerDependencies":     {
     "@nuxt/content": "^2.0.0 || ^3.0.0",
-    "nuxt": "^3.0.0 || ^4.0.0"
+    "nuxt":          "^3.0.0 || ^4.0.0"
   },
   "peerDependenciesMeta": {
     "@nuxt/content": {

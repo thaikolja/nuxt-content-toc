@@ -1,0 +1,23 @@
+name: nuxt-content-toc
+description: A highly customizable and accessible Table of Contents for Nuxt Content v2 & v3.
+repo: thaikolja/nuxt-content-toc
+npm: nuxt-content-toc
+icon: i-heroicons-list-bullet
+github: https://github.com/thaikolja/nuxt-content-toc
+website: https://thaikolja.github.io/nuxt-content-toc/
+learn_more: https://thaikolja.github.io/nuxt-content-toc/
+category: content
+type: 3rd-party
+maintainers:
+  - name: Kolja Nolte
+    github: thaikolja
+    gitlab: thaikolja
+    twitter: thaikolja
+    bluesky: thaikolja.bsky.social
+  - name: hanyujie2002
+    github: hanyujie2002
+compatibility:
+  nuxt: =>3.0.0
+  nuxt-content: ^2.0.0 || ^3.0.0
+  requires:
+    bridge: false

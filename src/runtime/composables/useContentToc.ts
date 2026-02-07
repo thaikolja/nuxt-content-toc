@@ -6,8 +6,10 @@
  * @module useContentToc
  */
 
+/* eslint-disable @typescript-eslint/ban-ts-comment */
+
 import { ref, computed, watch, isRef, unref } from 'vue'
-import { useRoute, useRuntimeConfig } from '#app'
+import { useRoute, useRuntimeConfig, useAsyncData, useNuxtApp } from '#app'
 import type { ContentTocRuntimeConfig, TocItem, UseContentTocReturn } from '../types'
 
 /**
@@ -37,14 +39,38 @@ interface ContentDocument {
   }
 }
 
-async function loadContentModule() {
-  // Access query functions from global scope (auto-imported by Nuxt)
-  if (typeof globalThis !== 'undefined') {
-    const g = globalThis as Record<string, unknown>
+async function fetchContent(path: string, nuxtApp: ReturnType<typeof useNuxtApp>) {
+  // @ts-ignore: Resolved by Nuxt
+  const localCollection = typeof queryCollection !== 'undefined' ? queryCollection : undefined
+  // @ts-ignore: Resolved by Nuxt
+  const localContent = typeof queryContent !== 'undefined' ? queryContent : undefined
+
+  const g = globalThis as unknown
+  // @ts-ignore
+  const n = typeof global !== 'undefined' ? global : {} as unknown
+
+  const globalCollection = g.queryCollection || n.queryCollection
+  const globalContent = g.queryContent || n.queryContent
+
+  const _queryCollection = localCollection || globalCollection
+  const _queryContent = localContent || globalContent
+
+  // Try v3 first
+  if (_queryCollection) {
+    const content = await nuxtApp.runWithContext(() => _queryCollection('content').path(path).first())
+    return {
+      type: 'v3',
+      data: content,
+    }
+  }
+
+  // Fallback to v2
+  if (_queryContent) {
+    const content = await nuxtApp.runWithContext(() => _queryContent(path).findOne())
 
     return {
-      queryCollection: g.queryCollection as ((name: string) => { path: (p: string) => { first: () => Promise<ContentDocument | null> } }) | undefined,
-      queryContent: g.queryContent as ((path: string) => { findOne: () => Promise<ContentDocument | null> }) | undefined,
+      type: 'v2',
+      data: content,
     }
   }
 
@@ -153,6 +179,7 @@ function flattenHeadingIds(items: TocItem[]): string[] {
 export function useContentToc(pathOrContent?: string | Record<string, unknown>): UseContentTocReturn {
   const route = useRoute()
   const config = useRuntimeConfig()
+  const nuxtApp = useNuxtApp()
 
   const options = (config.public.contentToc || {}) as Partial<ContentTocRuntimeConfig>
   const levels = options.levels || [2, 3, 4]
@@ -193,34 +220,46 @@ export function useContentToc(pathOrContent?: string | Record<string, unknown>):
       // Otherwise fetch by path
       const contentPath = (typeof provided === 'string' ? provided : undefined) || route.path
 
-      const contentModule = await loadContentModule()
+      // Use useAsyncData to handle SSR hydration and deduplication
+      const { data: fetchedToc, pending: asyncPending, error: asyncError, refresh: asyncRefresh } = await useAsyncData(
+        `toc-${contentPath}`,
+        async () => {
+          const result = await fetchContent(contentPath, nuxtApp)
 
-      if (contentModule?.queryCollection) {
-        const content = await contentModule.queryCollection('content').path(contentPath).first()
+          if (!result?.data) {
+            return []
+          }
 
-        if (content?.body?.toc?.links) {
-          toc.value = normalizeV3Toc(content.body.toc.links, levels)
-        }
-        else if (content?.toc?.links) {
-          toc.value = normalizeV3Toc(content.toc.links, levels)
-        }
-        else {
-          toc.value = []
-        }
-      }
-      else if (contentModule?.queryContent) {
-        const content = await contentModule.queryContent(contentPath).findOne()
+          if (result.type === 'v3') {
+            const content = result.data
+            if (content?.body?.toc?.links) {
+              return normalizeV3Toc(content.body.toc.links, levels)
+            }
+            else if (content?.toc?.links) {
+              return normalizeV3Toc(content.toc.links, levels)
+            }
+          }
+          else {
+            // v2
+            const content = result.data
+            if (content?.body?.toc?.links) {
+              return normalizeV2Toc(content.body.toc.links, levels)
+            }
+          }
+          return []
+        },
+        {
+          watch: [() => route.path],
+        },
+      )
 
-        if (content?.body?.toc?.links) {
-          toc.value = normalizeV2Toc(content.body.toc.links, levels)
-        }
-        else {
-          toc.value = []
-        }
-      }
-      else {
-        toc.value = []
-      }
+      // Update local reactive state from useAsyncData
+      toc.value = fetchedToc.value || []
+      pending.value = asyncPending.value
+      error.value = asyncError.value as Error | null
+
+      // The refresh function should now trigger useAsyncData's refresh
+      refresh = asyncRefresh as () => Promise<void>
     }
     catch (err) {
       // Capture error in reactive ref for component handling
@@ -235,15 +274,15 @@ export function useContentToc(pathOrContent?: string | Record<string, unknown>):
   /**
    * Refresh TOC data manually.
    */
-  async function refresh() {
+  let refresh = async () => {
     await fetchToc()
   }
 
   // Watch for route changes or input changes
   watch(
     [() => route.path, () => (isRef(pathOrContent) ? pathOrContent.value : pathOrContent)],
-    () => {
-      fetchToc()
+    async () => {
+      await fetchToc()
     },
     { immediate: true },
   )

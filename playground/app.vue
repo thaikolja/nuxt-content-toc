@@ -1,20 +1,5 @@
-<!--
-  Playground Root App
-  Provides global layout for the demo application
--->
-
 <script setup>
-// Force dark mode on HTML element
-if (import.meta.client) {
-  document.documentElement.classList.add('dark')
-}
-
-// Also set via useHead for SSR
-useHead({
-  htmlAttrs: {
-    class: 'dark',
-  },
-})
+// Removed forced dark mode class for styling verification
 </script>
 
 <template>
@@ -37,10 +22,17 @@ useHead({
     scroll-behavior: smooth;
   }
 
-  html.dark body {
+  body {
     font-family:      system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
                       "Helvetica Neue", Arial, sans-serif;
     line-height:      1.5;
+    color:            #18181b;
+    background-color: #ffffff;
+    transition:       background-color 0.3s ease, color 0.3s ease;
+  }
+
+  /* Support for dark class on html */
+  html.dark body {
     color:            #e4e4e7;
     background-color: #202020;
   }

@@ -11,25 +11,29 @@
  * Override these in your own CSS to customize the appearance.
  */
 :root {
+  --toc-font-family:         inherit;
   --toc-font-size:           0.875rem;
-  --toc-line-height:         1.5;
-  --toc-text-color:          #374151;
-  --toc-text-color-hover:    #111827;
-  --toc-active-color:        #00ff00;
-  --toc-border-color:        #e5e7eb;
-  --toc-active-border-color: #3b82f6;
-  --toc-indent:              1rem;
-  --toc-transition-duration: 150ms;
+  --toc-font-weight:         400;
+  --toc-line-height:         1.6;
+  --toc-text-color:          inherit;
+  --toc-text-color-hover:    #000000;
+  --toc-active-color:        #000000;
+  --toc-active-font-weight:  600;
+  --toc-border-color:        #eeeeee;
+  --toc-active-border-color: #000000;
+  --toc-border-width:        2px;
+  --toc-indent:              1.25rem;
+  --toc-transition-duration: 200ms;
 }
 
-/* Dark mode support */
+/* Dark mode support - Black and White */
 @media (prefers-color-scheme: dark) {
   :root {
-    --toc-text-color:          #d1d5db;
-    --toc-text-color-hover:    #f9fafb;
-    --toc-active-color:        #60a5fa;
-    --toc-border-color:        #374151;
-    --toc-active-border-color: #60a5fa;
+    --toc-text-color:          #a1a1aa;
+    --toc-text-color-hover:    #ffffff;
+    --toc-active-color:        #ffffff;
+    --toc-border-color:        #3f3f46;
+    --toc-active-border-color: #ffffff;
   }
 }
 
@@ -37,8 +41,49 @@
  * Table of Contents Container
  */
 .toc-container {
-  font-size:   var(--toc-font-size);
-  line-height: var(--toc-line-height);
+  font-family:    var(--toc-font-family);
+  font-size:      var(--toc-font-size);
+  line-height:    var(--toc-line-height);
+  font-weight:    var(--toc-font-weight);
+  display:        flex;
+  flex-direction: column;
+}
+
+/* Alignment logic */
+.toc-align-left {
+  align-items: flex-start;
+  text-align:  left;
+}
+
+.toc-align-center {
+  align-items: center;
+  text-align:  center;
+}
+
+.toc-align-right {
+  align-items: flex-end;
+  text-align:  right;
+}
+
+/* Ensure links expand or align based on container */
+.toc-align-center .toc-link,
+.toc-align-right .toc-link {
+  border-left:  none;
+  padding-left: 0;
+}
+
+.toc-align-center .toc-link.toc-active {
+  text-decoration:       underline;
+  text-underline-offset: 4px;
+}
+
+.toc-align-right .toc-link {
+  border-right:  var(--toc-border-width) solid var(--toc-border-color);
+  padding-right: 0.75rem;
+}
+
+.toc-align-right .toc-link.toc-active {
+  border-right-color: var(--toc-active-border-color);
 }
 
 /**
@@ -66,9 +111,8 @@
   padding:         0.375rem 0 0.375rem 0.75rem;
   color:           var(--toc-text-color);
   text-decoration: none;
-  border-left:     2px solid var(--toc-border-color);
-  transition:      color var(--toc-transition-duration) ease,
-                   border-color var(--toc-transition-duration) ease;
+  border-left:     var(--toc-border-width) solid var(--toc-border-color);
+  transition:      all var(--toc-transition-duration) ease;
 }
 
 .toc-link:hover {
@@ -82,7 +126,7 @@
 .toc-link.toc-active {
   color:             var(--toc-active-color);
   border-left-color: var(--toc-active-border-color);
-  font-weight:       500;
+  font-weight:       var(--toc-active-font-weight);
 }
 
 /**

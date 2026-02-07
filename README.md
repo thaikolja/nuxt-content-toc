@@ -1,11 +1,14 @@
 # nuxt-content-toc
 
-[![npm version](https://img.shields.io/npm/v/nuxt-content-toc?color=brightgreen&label=npm%20package)](https://www.npmjs.com/package/nuxt-content-toc)
-[![License](https://img.shields.io/npm/l/nuxt-content-toc)](https://github.com/your-org/nuxt-content-toc/blob/main/LICENSE)
-[![Nuxt](https://img.shields.io/badge/Nuxt-3.x%20%7C%204.x-00C58E?logo=nuxt.js)](https://nuxt.com)
-[![Nuxt Content](https://img.shields.io/badge/Nuxt%20Content-v2%20%7C%20v3-00C58E)](https://content.nuxt.com)
+![GitHub Release](https://img.shields.io/github/v/release/thaikolja/nuxt-content-toc?sort=semver&display_name=release&style=flat&logo=i-heroicons-list-bullet)
 
-A highly customizable, accessible, and SSR-friendly Table of Contents (TOC) component for **@nuxt/content**.
+
+
+![GitHub Release](https://img.shields.io/github/v/release/nuxt/nuxt?sort=semver&display_name=release&style=flat&logo=i-heroicons-list-bullet)
+
+A customizable, accessible, and SSR-friendly module for Nuxt giving you the `<TableOfContents />` component
+
+ Table of Contents (TOC) component for [**@nuxt/content**](https://content.nuxt.com/) modules. 
 
 > 📖 **Full Documentation**: [https://thaikolja.github.io/nuxt-content-toc/](https://thaikolja.github.io/nuxt-content-toc/)
 
@@ -23,7 +26,7 @@ Works seamlessly with both **Nuxt Content v2** and **v3**.
 
 ## Quick Setup
 
-1.  Add `nuxt-content-toc` dependency to your project
+1. Add `nuxt-content-toc` dependency to your project
 
 ```bash
 # Using yarn
@@ -36,15 +39,12 @@ npm install nuxt-content-toc
 pnpm add nuxt-content-toc
 ```
 
-2.  Add `nuxt-content-toc` to the `modules` section of `nuxt.config.ts`
+1. Add `nuxt-content-toc` to the `modules` section of `nuxt.config.ts`
 
 ```typescript
 export default defineNuxtConfig({
-  modules: [
-    'nuxt-content-toc',
-    '@nuxt/content'
-  ]
-})
+  modules: ["nuxt-content-toc", "@nuxt/content"],
+});
 ```
 
 That's it! You can now use the `TableOfContents` component in your app.
@@ -59,9 +59,9 @@ Simply drop the component into your page. It automatically fetches the TOC for t
 <template>
   <main>
     <article>
-      <ContentDoc /> 
+      <ContentDoc />
     </article>
-    
+
     <aside>
       <TableOfContents />
     </aside>
@@ -75,13 +75,13 @@ If you've already fetched the content data (e.g., using `useAsyncData`), pass it
 
 ```vue
 <script setup>
-const { data } = await useAsyncData('page', () => queryContent('/').findOne())
+const { data } = await useAsyncData("page", () => queryContent("/").findOne());
 </script>
 
 <template>
   <div class="page-layout">
     <ContentRenderer :value="data" />
-    
+
     <!-- Pass the content object directly -->
     <TableOfContents :page="data" />
   </div>
@@ -96,32 +96,32 @@ You can configure defaults in your `nuxt.config.ts`:
 
 ```typescript
 export default defineNuxtConfig({
-  modules: ['nuxt-content-toc'],
-  
+  modules: ["nuxt-content-toc"],
+
   contentToc: {
     levels: [2, 3, 4],
-    activeClass: 'toc-active',
+    activeClass: "toc-active",
     scrollOffset: 80, // Offset for fixed headers
-    itemClass: 'toc-item',
-    sublistClass: 'toc-sublist'
-  }
-})
+    itemClass: "toc-item",
+    sublistClass: "toc-sublist",
+  },
+});
 ```
 
 ## Component Props (`<TableOfContents />`)
 
 Override global settings per instance using props:
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `levels` | `number[]` | `[2, 3, 4]` | Headings levels to include. |
-| `activeClass` | `string` | `'toc-active'` | Class added to the active link and its parents. |
-| `path` | `string` | `current route` | Fetch TOC for a specific path instead of current. |
-| `page` | `object` | `null` | Pass content object directly (skips fetch). |
-| `scrollOffset` | `number` | `80` | Offset (px) for scroll spy calculation. |
-| `ariaLabel` | `string` | `'Table of Contents'` | ARIA label for accessibility. |
-| `itemClass` | `string` | `'toc-item'` | Class for each list item (`li`). |
-| `sublistClass` | `string` | `'toc-sublist'` | Class for nested lists (`ul`). |
+| Prop           | Type       | Default               | Description                                       |
+| -------------- | ---------- | --------------------- | ------------------------------------------------- |
+| `levels`       | `number[]` | `[2, 3, 4]`           | Headings levels to include.                       |
+| `activeClass`  | `string`   | `'toc-active'`        | Class added to the active link and its parents.   |
+| `path`         | `string`   | `current route`       | Fetch TOC for a specific path instead of current. |
+| `page`         | `object`   | `null`                | Pass content object directly (skips fetch).       |
+| `scrollOffset` | `number`   | `80`                  | Offset (px) for scroll spy calculation.           |
+| `ariaLabel`    | `string`   | `'Table of Contents'` | ARIA label for accessibility.                     |
+| `itemClass`    | `string`   | `'toc-item'`          | Class for each list item (`li`).                  |
+| `sublistClass` | `string`   | `'toc-sublist'`       | Class for nested lists (`ul`).                    |
 
 ## Development
 
