@@ -5,12 +5,17 @@
  */
 
 import { fileURLToPath } from 'node:url'
+import { resolve, dirname } from 'node:path'
 import { describe, it, expect } from 'vitest'
 import { setup, $fetch } from '@nuxt/test-utils/e2e'
 
 describe('nuxt-content-toc', async () => {
+  const __dirname = dirname(fileURLToPath(import.meta.url))
+  const rootDir = resolve(__dirname, './fixtures/basic')
+  console.log('Resolved rootDir:', rootDir)
+
   await setup({
-    rootDir: fileURLToPath(new URL('./fixtures/basic', import.meta.url)),
+    rootDir,
   })
 
   it('renders the TableOfContents component', async () => {

@@ -1,10 +1,17 @@
+<script setup lang="ts">
+import { useAsyncData } from '#app'
+import { queryCollection } from '#imports'
+
+const { data } = await useAsyncData('home', () => queryCollection('content').path('/').first())
+</script>
+
 <template>
   <div>
     <main>
-      <ContentDoc />
+      <ContentRenderer :value="data" />
     </main>
     <aside>
-      <TableOfContents />
+      <TableOfContents :page="data" />
     </aside>
   </div>
 </template>
