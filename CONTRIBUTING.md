@@ -4,27 +4,30 @@ Thank you for considering contributing to `nuxt-content-toc`!
 
 ## Setup
 
-1.  Clone the repository:
-    ```bash
-    git clone https://github.com/your-org/nuxt-content-toc.git
-    cd nuxt-content-toc
-    ```
+1. Clone the repository:
 
-2.  Install dependencies:
-    ```bash
-    yarn install
-    ```
+   ```bash
+   git clone https://github.com/thaikolja/nuxt-content-toc.git
+   cd nuxt-content-toc
+   ```
 
-3.  Start the playground in development mode:
-    ```bash
-    yarn dev
-    ```
+2. Install dependencies:
+
+   ```bash
+   yarn install
+   ```
+
+3. Start the playground in development mode:
+
+   ```bash
+   yarn dev
+   ```
 
 ## Development
 
--   **Module Source**: Located in `src/`.
--   **Playground**: Located in `playground/`. Use this to test your changes.
--   **Tests**: Located in `test/`. Run `yarn test` to verify changes.
+- **Module Source**: Located in `src/`.
+- **Playground**: Located in `playground/`. Use this to test your changes.
+- **Tests**: Located in `test/`. Run `yarn test` to verify changes.
 
 ## Testing
 
@@ -44,10 +47,10 @@ yarn lint
 
 ## Submitting Pull Requests
 
-1.  Fork the repository.
-2.  Create a new branch for your feature or bug fix.
-3.  Commit your changes following [Conventional Commits](https://www.conventionalcommits.org/).
-4.  Push your branch and submit a Pull Request.
+1. Fork the repository.
+2. Create a new branch for your feature or bug fix.
+3. Commit your changes following [Conventional Commits](https://www.conventionalcommits.org/).
+4. Push your branch and submit a Pull Request.
 
 ## License
 

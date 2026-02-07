@@ -12,64 +12,9 @@
 import { addComponent, addImports, addPlugin, createResolver, defineNuxtModule } from '@nuxt/kit'
 import { name, version } from '../package.json'
 
-/**
- * Configuration options for the nuxt-content-toc module.
- *
- * @interface ModuleOptions
- * @description These options can be set in `nuxt.config.ts` under the `contentToc` key.
- *
- * @example
- * ```ts
- * // nuxt.config.ts
- * export default defineNuxtConfig({
- *   modules: ['nuxt-content-toc'],
- *   contentToc: {
- *     levels: [2, 3],
- *     activeClass: 'toc-active',
- *     scrollOffset: 100,
- *   },
- * })
- * ```
- */
-export interface ModuleOptions {
-  /**
-   * Heading levels to include in the table of contents.
-   * @default [2, 3, 4]
-   * @example [2, 3] // Only h2 and h3
-   */
-  levels?: number[]
+import type { ModuleOptions } from './runtime/types'
 
-  /**
-   * CSS class applied to the currently active TOC item.
-   * @default 'toc-active'
-   */
-  activeClass?: string
-
-  /**
-   * CSS class applied to each TOC item.
-   * @default 'toc-item'
-   */
-  itemClass?: string
-
-  /**
-   * CSS class applied to nested sublists.
-   * @default 'toc-sublist'
-   */
-  sublistClass?: string
-
-  /**
-   * CSS class applied to sublist items.
-   * @default 'toc-sublist-item'
-   */
-  sublistItemClass?: string
-
-  /**
-   * Offset from the top of the viewport (in pixels) when determining
-   * which heading is currently active. Useful for fixed headers.
-   * @default 80
-   */
-  scrollOffset?: number
-}
+export type { ModuleOptions }
 
 /**
  * Default module options.
@@ -82,6 +27,14 @@ const DEFAULT_OPTIONS: Required<ModuleOptions> = {
   sublistClass: 'toc-sublist',
   sublistItemClass: 'toc-sublist-item',
   scrollOffset: 80,
+  fontFamily: 'inherit',
+  fontWeight: 'inherit',
+  activeFontWeight: 600,
+  borderWidth: '2px',
+  indentSize: '1.25rem',
+  align: 'left',
+  textColor: '#000000',
+  activeColor: '#2563eb',
 }
 
 export default defineNuxtModule<ModuleOptions>({
