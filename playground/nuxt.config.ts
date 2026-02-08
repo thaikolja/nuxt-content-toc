@@ -26,6 +26,5 @@ export default defineNuxtConfig({
   contentToc: {
     levels: [2, 3, 4],
     activeClass: 'toc-active',
-    scrollOffset: 80,
   },
 })
