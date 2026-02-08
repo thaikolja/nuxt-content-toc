@@ -1,18 +1,10 @@
 # nuxt-content-toc
 
-![GitHub Release](https://img.shields.io/github/v/release/thaikolja/nuxt-content-toc?sort=semver&display_name=release&style=flat&logo=i-heroicons-list-bullet)
+![GitHub Release](https://img.shields.io/github/v/release/thaikolja/nuxt-content-toc?sort=semver&display_name=release&style=flat&logo=i-heroicons-list-bullet) ![GitHub Release](https://img.shields.io/github/v/release/nuxt/nuxt?sort=semver&display_name=release&style=flat&logo=i-heroicons-list-bullet)
 
+A customizable, accessible, and SSR-friendly module for Nuxt giving you the `<TableOfContents />` component. The component works seamlessly with both `@nuxt/content` v2 and `@nuxt/content` v3.
 
-
-![GitHub Release](https://img.shields.io/github/v/release/nuxt/nuxt?sort=semver&display_name=release&style=flat&logo=i-heroicons-list-bullet)
-
-A customizable, accessible, and SSR-friendly module for Nuxt giving you the `<TableOfContents />` component
-
- Table of Contents (TOC) component for [**@nuxt/content**](https://content.nuxt.com/) modules. 
-
-> 📖 **Full Documentation**: [https://thaikolja.github.io/nuxt-content-toc/](https://thaikolja.github.io/nuxt-content-toc/)
-
-Works seamlessly with both **Nuxt Content v2** and **v3**.
+**For more information, please read the documentation:** [Documentation](https://thaikolja.github.io/nuxt-content-toc/)
 
 ## Features
 

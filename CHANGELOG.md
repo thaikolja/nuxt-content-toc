@@ -2,26 +2,11 @@
 
 All notable changes to this project will be documented in this file.
 
-## v3.1.0
+---
 
+## v3.0.0-alpha-1
 
-### 🚀 Enhancements
-
-- V3.0.0-beta-1 ([a2d687f](https://github.com/thaikolja/nuxt-content-toc/commit/a2d687f))
-
-### 📖 Documentation
-
-- Update generated documentation with new SQL dump content. ([bdfcd2c](https://github.com/thaikolja/nuxt-content-toc/commit/bdfcd2c))
-
-### 🏡 Chore
-
-- Clean up build artifacts, add Bun lockfile, and update testing configuration to Vitest. ([0e26c77](https://github.com/thaikolja/nuxt-content-toc/commit/0e26c77))
-
-### ❤️ Contributors
-
-- Kolja Nolte ([@pasathai-org](https://github.com/pasathai-org))
-
-## v3.0.0 - 2026-02-08
+**Date:** 2026-02-08
 
 ### Major Changes
 
