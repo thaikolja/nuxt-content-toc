@@ -35,7 +35,9 @@ jobs:
         run: yarn dev:prepare
 
       - name: Generate static documentation
-        run: yarn generate:docs
+        run: yarn workspace:playground generate
+        env:
+          NUXT_APP_BASE_URL: /nuxt-content-toc/
 
       - name: Add .nojekyll file
         run: touch docs/.nojekyll
@@ -45,11 +47,11 @@ jobs:
           echo "=== Docs directory contents ==="
           ls -la docs/
           echo ""
-          echo "=== Verify .nojekyll exists ==="
-          cat docs/.nojekyll && echo " (empty file expected)" || echo "No .nojekyll"
+          echo "=== Verify index.html exists ==="
+          head -10 docs/index.html 2>/dev/null || echo "No index.html"
           echo ""
-          echo "=== Sample of docs content ==="
-          head -20 docs/index.html 2>/dev/null || echo "No index.html"
+          echo "=== Check _nuxt folder ==="
+          ls -la docs/_nuxt/ 2>/dev/null | head -20 || echo "No _nuxt folder"
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
