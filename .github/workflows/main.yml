@@ -40,6 +40,17 @@ jobs:
       - name: Add .nojekyll file
         run: touch docs/.nojekyll
 
+      - name: List docs directory structure
+        run: |
+          echo "=== Docs directory contents ==="
+          ls -la docs/
+          echo ""
+          echo "=== Verify .nojekyll exists ==="
+          cat docs/.nojekyll && echo " (empty file expected)" || echo "No .nojekyll"
+          echo ""
+          echo "=== Sample of docs content ==="
+          head -20 docs/index.html 2>/dev/null || echo "No index.html"
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
