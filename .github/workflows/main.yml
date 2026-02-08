@@ -35,7 +35,7 @@ jobs:
         run: yarn dev:prepare
 
       - name: Generate static documentation
-        run: yarn workspace:playground generate
+        run: yarn workspace my-module-playground nuxt generate
         env:
           NUXT_APP_BASE_URL: /nuxt-content-toc/
 
