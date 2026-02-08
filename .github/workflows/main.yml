@@ -7,7 +7,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: contents: read
   pages: write
   id-token: write
 
@@ -35,7 +35,7 @@ jobs:
         run: yarn dev:prepare
 
       - name: Generate static documentation
-        run: yarn -C playground generate
+        run: cd playground && npx nuxt generate
         env:
           NUXT_APP_BASE_URL: /nuxt-content-toc/
 
