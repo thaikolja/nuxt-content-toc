@@ -701,7 +701,6 @@ const resolvedVersion = typeof __NUXT_CONTENT_TOC_VERSION__ !== 'undefined' ? __
     }
 
     .prose :deep(pre) {
-      border-radius: 6px;
       padding:       1rem;
       margin-left:   -1rem;
       margin-right:  -1rem;
