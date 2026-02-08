@@ -21,7 +21,7 @@
       "url":  "https://github.com/hanyujie2002"
     }
   ],
-  "private":              false,
+  "private":              true,
   "type":                 "module",
   "exports":              {
     ".": {
