@@ -21,7 +21,7 @@ export type { ModuleOptions }
  * @internal
  */
 const DEFAULT_OPTIONS: Required<ModuleOptions> = {
-  levels: [2, 3, 4],
+  levels: [3, 4],
   activeClass: 'toc-active',
   itemClass: 'toc-item',
   sublistClass: 'toc-sublist',
@@ -82,6 +82,10 @@ export default defineNuxtModule<ModuleOptions>({
 
     // Ensure runtime is transpiled (module is shipped as TS in dist/runtime)
     nuxt.options.build.transpile.push(resolver.resolve('./runtime'))
+
+    // Add the CSS globally
+    nuxt.options.css = nuxt.options.css || []
+    nuxt.options.css.push(resolver.resolve('./runtime/assets/toc.css'))
 
     // Add the plugin for runtime initialization
     addPlugin(resolver.resolve('./runtime/plugin'))

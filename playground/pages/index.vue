@@ -40,7 +40,6 @@ const { data: page } = await useAsyncData('index', async () => {
 })
 
 // Version constant for display
-// Version constant for display
 const resolvedVersion = typeof __NUXT_CONTENT_TOC_VERSION__ !== 'undefined' ? __NUXT_CONTENT_TOC_VERSION__ : '0.0.0'
 </script>
 
@@ -276,7 +275,6 @@ const resolvedVersion = typeof __NUXT_CONTENT_TOC_VERSION__ !== 'undefined' ? __
     min-height:       100vh;
     background-color: #151515;
     color:            #fafafa;
-    overflow-x:       clip; /* Use clip if needed, or initial. Sticky needs ancestors to not be overflow hidden/scroll/auto usually on axis */
     overflow-x:       initial;
   }
 
