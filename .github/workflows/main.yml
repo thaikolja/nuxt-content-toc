@@ -35,7 +35,7 @@ jobs:
         run: yarn dev:prepare
 
       - name: Generate static documentation
-        run: cd playground && nuxt generate
+        run: yarn -C playground generate
         env:
           NUXT_APP_BASE_URL: /nuxt-content-toc/
 
@@ -64,7 +64,7 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     needs: build
-    steps: 
+    steps:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
