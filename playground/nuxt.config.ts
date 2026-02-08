@@ -3,14 +3,12 @@ export default defineNuxtConfig({
   modules: ['nuxt-content-toc', '@nuxt/content', '@nuxtjs/tailwindcss'],
 
   devtools: { enabled: false },
-
-  //  app: {
-  //    baseURL: process.env.NUXT_APP_BASE_URL || '/nuxt-content-toc/',
-  //  },
+  app: {
+    baseURL: '/nuxt-content-toc/',
+  },
 
   css: ['~/assets/global.css'],
 
-  // Content module configuration
   content: {
     // Default content configuration
   },
