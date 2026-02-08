@@ -48,7 +48,7 @@
     "dev":           "npm run dev:prepare && nuxt dev playground",
     "dev:v2":        "cd test/fixtures/v2 && npm run dev",
     "dev:build":     "nuxt build playground",
-    "generate:docs": "nuxt generate playground",
+    "generate:docs": "nuxt generate playground && touch docs/.nojekyll",
     "dev:prepare":   "nuxt-module-build build --stub && nuxt-module-build prepare && nuxt prepare playground",
     "release":       "npm run lint && npm run test && npm run prepack && changelogen --release && npm publish && git push --follow-tags",
     "lint":          "eslint .",
