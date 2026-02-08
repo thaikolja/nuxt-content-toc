@@ -12,7 +12,7 @@ export default defineNuxtConfig({
 
   // Content module configuration
   content: {
-    // Default content configuration
+    // Default content conxxfiguration
   },
   compatibilityDate: 'latest',
 
