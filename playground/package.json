@@ -8,7 +8,7 @@
     "generate": "nuxt generate"
   },
   "dependencies": {
-    "my-module": "latest",
-    "nuxt":      "^4.3.0"
+    "nuxt-content-toc": "workspace:*",
+    "nuxt":             "^4.3.0"
   }
 }
