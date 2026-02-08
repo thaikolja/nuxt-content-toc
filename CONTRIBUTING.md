@@ -1,6 +1,6 @@
 # Contributing
 
-Thank you for considering contributing to `nuxt-content-toc`!
+Thank you for considering contributing to `nuxt-content-toc`.
 
 ## Setup
 
